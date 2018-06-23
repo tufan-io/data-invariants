@@ -17,25 +17,25 @@ A library to extract invariants over partially variable data
 
 ## Why?
 
-Oftentimes, much of an applications functionality reduces to stiching together multiple API responses to achieve an objective. This is however both a blessing and a curse.
+Oftentimes, much of an applications functionality reduces to stiching together multiple API responses to achieve an objective. 
 
-A blessing since the applications are smaller, simpler and easier to reason about, meaning more correct.
+This is however both a blessing and a curse. A blessing since the application is smaller, simpler and easier to reason about, meaning more correct. A curse because the appication is at the mercy of remote API responses when it comes to guaranteeing correctness.
 
-A curse because the appication is at the mercy of remote API responses when it comes to guaranteeing correctness.
+The complexity in ensuring program correctness is reduced to the need for a data contract with the external APIs. At a system design level, one can mandate version control, schema specification and the like. However, these are outside our application's control and we are the mercy of the external API author(s).
 
-A primary cause of the complexity in ensuring program correctness is ensuring a data contract with the external APIs. At a system design level, one can mandate version control, schema specification and the like. However, these are outside our applications control.
+Being the OCD engineers we are, we WILL NOT relinquish control! But... we are also lazy. Just because we want control doesn't mean we want to work too hard for it!
 
-Being the OCD engineers we are, we WILL NOT relinquish that control! But we are also lazy. Just because we want control doesn't mean we want to work too hard for it.
+If this sounds like you, Welcome. Glad to have found a kindred spirit!
 
-If this sounds like you, Welcome. We're glad to have found a kindred spirit!
+The rest of this document describes a simple protocol that get's us most of desired control on rough API response data, by imposing a "good-enough-for-most-practical-use" data contract over it.
 
 ## Design
 
 ### The Problem
 
 - We have a large blob of data, controlled by an external entity.
-- Some fields in the data, vary based on externalities - time, credentials, signatures, network latencies etc., completely outside anyones control.
-- We want to use that data but want to ensure that it's shape and structure remains consistent across this variance.
+- Some fields in the data, vary based on externalities - time, credentials, signatures, network latencies etc., completely outside our control.
+- We want to use that data but want predictability over it's shape and structure as time and the software-lifecycle passes.
 - Any change is typically complicated and requires us to fix code.
 - We want to minimize the work we do in detection, so we can focus our efforts on corrective action.
 
@@ -85,10 +85,9 @@ We achieve almost all of the required data-contract with a simple snapshot.
 
 Under the covers, `data-invariants` uses [`micromatch`](https://github.com/micromatch/micromatch) for it's filtering capabilities.
 
-It also implements `data-shape`, a utility that recursively walks the data and reduces the values to one of [`string`, 1, true, null]. `data-shape` only supports the JSON types for this, and throws on anything but [string, number, boolean,null]. The data itself can be an arbtrarily complex structure of objects/arrays.
+It also implements `data-shape`, a utility that recursively walks the data and reduces the values to one of `['string', 1, true, null]`. `data-shape` only supports (some) of the [basic JSON types](https://cswr.github.io/JsonSchema/spec/basic_types/), and throws on anything but [string, number, boolean,null]. The data itself can be an arbtrarily complex structure of objects/arrays.
 
-`micromatch` was designed to match file paths, which means it uses '/' as the seperator - both in the input string(s) and glob-patterns. Since we have established our laziness at this point, we obviously require that you specify globPatterns in a form that `micromatch` likes.
-Please see [`micromatch`](https://github.com/micromatch/micromatch#matching-features) for details.
+`micromatch` was designed to match file paths, which means it uses '/' as the seperator - both in the input string(s) and glob-patterns. Since we have established our laziness at this point, we obviously require that you specify globPatterns in a form that `micromatch` likes. Please see [`micromatch`](https://github.com/micromatch/micromatch#matching-features) for details.
 
 ## Development Tooling
 
