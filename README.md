@@ -27,7 +27,7 @@ Being the OCD engineers we are, we WILL NOT relinquish control! But... we are al
 
 If this sounds like you, Welcome. Glad to have found a kindred spirit!
 
-The rest of this document describes a simple protocol that get's us most of desired control on rough API response data, by imposing a "good-enough-for-most-practical-use" data contract over it.
+The rest of this document describes a simple protocol that gets us most of desired control on rough API response data, by imposing a "good-enough-for-most-practical-use" data contract over it.
 
 ## Design
 
