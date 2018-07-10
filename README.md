@@ -27,23 +27,23 @@ Being the OCD engineers we are, we WILL NOT relinquish control! But... we are al
 
 If this sounds like you, Welcome. Glad to have found a kindred spirit!
 
-The rest of this document describes a simple protocol that get's us most of desired control on rough API response data, by imposing a "good-enough-for-most-practical-use" data contract over it.
+The rest of this document describes a simple protocol that gets us most of desired control on time/instance variant data, by imposing a "good-enough-for-most-practical-use" data contract over it.
 
 ## Design
 
 ### The Problem
 
 - We have a large blob of data, controlled by an external entity.
-- Some fields in the data, vary based on externalities - time, credentials, signatures, network latencies etc., completely outside our control.
+- _Some_ fields in the data, vary based on externalities - time, credentials, signatures, network latencies etc., completely outside our control.
 - We want to use that data but want predictability over it's shape and structure as time and the software-lifecycle passes.
-- Any change is typically complicated and requires us to fix code.
-- We want to minimize the work we do in detection, so we can focus our efforts on corrective action.
+- Any change is typically complicated and requires manual intervention to fix code.
+- We want to minimize the work involved in change detection, focussing our efforts on corrective action.
 
 ### The Solution
 
 The solution turns out to being rather simple - find invariants of the data that we can make assertions about.
 
-First insight is to split the data up into two parts - `{variant, invariant}`. Or more precisely, extract the `invariant` part of the data.
+The first insight is to split the data up into two parts - `{variant, invariant}`, or more precisely, extract the `invariant` part of the data.
 
 A second insight is that the `data-shape` is constant, irrespective of the actual variant data. Meaning asserting on the `data-shape` will yield most of the benefit with none of the pain.
 
@@ -85,7 +85,7 @@ We achieve almost all of the required data-contract with a simple snapshot.
 
 Under the covers, `data-invariants` uses [`micromatch`](https://github.com/micromatch/micromatch) for it's filtering capabilities.
 
-It also implements `data-shape`, a utility that recursively walks the data and reduces the values to one of `['string', 1, true, null]`. `data-shape` only supports (some) of the [basic JSON types](https://cswr.github.io/JsonSchema/spec/basic_types/), and throws on anything but [string, number, boolean,null]. The data itself can be an arbtrarily complex structure of objects/arrays.
+It also implements `data-shape`, a utility that recursively walks the data and reduces the values to one of `['string', 1, true, null]`. `data-shape` only supports (some - no integers) of the [basic JSON types](https://cswr.github.io/JsonSchema/spec/basic_types/), and throws on anything but `[string, number, boolean, null]`. The data itself can be an arbtrarily complex structure of objects/arrays.
 
 `micromatch` was designed to match file paths, which means it uses '/' as the seperator - both in the input string(s) and glob-patterns. Since we have established our laziness at this point, we obviously require that you specify globPatterns in a form that `micromatch` likes. Please see [`micromatch`](https://github.com/micromatch/micromatch#matching-features) for details.
 
