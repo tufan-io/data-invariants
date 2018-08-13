@@ -17,7 +17,7 @@ A library to extract invariants over partially variable data
 
 ## Why?
 
-Oftentimes, much of an applications functionality reduces to stiching together multiple API responses to achieve an objective. 
+Oftentimes, much of an applications functionality reduces to stiching together multiple API responses to achieve an objective.
 
 This is however both a blessing and a curse. A blessing since the application is smaller, simpler and easier to reason about, meaning more correct. A curse because the appication is at the mercy of remote API responses when it comes to guaranteeing correctness.
 
@@ -79,7 +79,7 @@ We achieve almost all of the required data-contract with a simple snapshot.
 
 > I don't always provide examples, but when I do, they have to be working examples!
 
-[working example](./test/index.ts)
+[working example](./src/test/index.ts)
 
 ### Implementation details
 
