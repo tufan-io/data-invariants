@@ -34,24 +34,26 @@
     "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95 --statements 95",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
     "nyc-report": "nyc report --reporter=text-summary",
-    "test-with-cover": "cross-env NODE_ENV=test nyc -r html -r text-summary ava --verbose",
+    "test-with-cover": "cross-env NODE_ENV=test nyc -r html -r lcov -r text-summary ava --verbose",
     "test-without-cover": "cross-env NODE_ENV=test ava --verbose",
     "build": "npm-run-batch",
     "qt": "npm-run-batch",
     "build:watch": "cross-env NODE_ENV=production run-batch",
     "pkg-ok": "pkg-ok",
-    "precommit": "run-batch",
-    "prepush": "run-batch",
+    "pre-commit-hook": "run-batch",
+    "pre-push-hook": "run-batch",
+    "snapshots": "cross-env NODE_ENV=test ava --verbose --update-snapshots",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "cloc": "cloc --exclude-dir=test --by-file ./src",
     "all": "run-batch"
   },
   "run-batch": {
     "build": [
+      "lint",
       [
         "clean",
         "clean:dist"
       ],
-      "lint",
       "compile:build",
       [
         "test-with-cover",
@@ -66,12 +68,12 @@
     "build:watch": [
       "compile:watch"
     ],
-    "precommit": [
+    "pre-commit-hook": [
       "check-coverage",
       "pkg-ok",
       "staged-mods-ok"
     ],
-    "prepush": [
+    "pre-push-hook": [
       "secure",
       "no-mods"
     ],
@@ -83,26 +85,27 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^10.3.5",
+    "@types/node": "^10.12.9",
     "ava": "^0.25.0",
-    "commitizen": "^2.10.1",
-    "conventional-changelog-cli": "^2.0.1",
-    "coveralls": "^3.0.1",
+    "cloc": "^2.3.4",
+    "commitizen": "^3.0.4",
+    "conventional-changelog-cli": "^2.0.11",
+    "coveralls": "^3.0.2",
     "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^2.1.0",
     "git-mods": "^1.0.9",
-    "graceful-fs": "^4.1.11",
-    "husky": "^0.14.3",
-    "leasot": "^6.3.0",
-    "mkdirp": "^0.5.1",
-    "npm-run-batch": "0.0.6",
-    "nyc": "^12.0.2",
-    "pkg-ok": "^2.2.0",
+    "husky": "^1.1.4",
+    "leasot": "^6.6.2",
+    "npm-run-batch": "0.0.8",
+    "nyc": "^13.1.0",
+    "pkg-ok": "^2.3.1",
     "rimraf": "^2.6.1",
-    "semantic-release": "^15.6.0",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "typestrict": "0.0.9"
+    "semantic-release": "^15.12.0",
+    "tslint": "^5.11.0",
+    "tslint-config-security": "^1.12.0",
+    "tslint-sonarts": "^1.7.0",
+    "typescript": "^3.1.6",
+    "typestrict": "^1.0.1"
   },
   "dependencies": {
     "micromatch": "^3.1.10"
@@ -129,5 +132,11 @@
       "build/**/test.js",
       "dist"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit-hook",
+      "pre-push": "npm run pre-push-hook"
+    }
   }
 }

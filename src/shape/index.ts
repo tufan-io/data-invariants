@@ -1,5 +1,4 @@
 
-
 /**
  * Given a JSON object, returns it's shape. It converts all values
  * to simple consistent values.
@@ -19,23 +18,23 @@
 export function shape(data: any) {
   const type = Object.prototype.toString.call(data);
   switch (type) {
-    case '[object Object]': {
+    case "[object Object]": {
       return Object.keys(data).reduce((acc, key) => {
         const val = data[key];
         acc[key] = shape(val);
         return acc;
-      }, <object>{});
+      }, {} as object);
     }
-    case '[object Array]': {
-      return (<Array<any>>data).map(el => shape(el));
+    case "[object Array]": {
+      return (data as any[]).map((el) => shape(el));
     }
-    case '[object String]':
-      return 'string';
-    case '[object Boolean]':
+    case "[object String]":
+      return "string";
+    case "[object Boolean]":
       return true;
-    case '[object Number]':
+    case "[object Number]":
       return 1;
-    case '[object Null]':
+    case "[object Null]":
       return null;
   }
 

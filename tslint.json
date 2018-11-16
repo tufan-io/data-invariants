@@ -2,7 +2,7 @@
     "env": {
         "node": true
     },
-    "extends": "typestrict",
+    "extends": ["tslint:recommended", "typestrict", "tslint-sonarts", "tslint-config-security"],
     "rules": {
         "comment-format": [
             true,

@@ -1,6 +1,6 @@
 
-import { filter } from './filter/index';
-import { shape as _shape } from './shape/index';
+import { filter } from "./filter/index";
+import { shape as _shape } from "./shape/index";
 
 export function dataInvariants(data: any, filters: string[]) {
   // a simple filters to eliminate non-json fields from data.
