@@ -49,26 +49,22 @@ export function filter(data: any, globPatterns: string[]) {
     globs: string[],
     path: string = "",
   ) => {
-    if (match(path, globs).length === 0) {
-      return undefined;
-    }
     const type = Object.prototype.toString.call(_data);
+    if (match(path, globs).length === 0) {
+      return `[VARIANT_DATA: ${type.replace(/\[object /, "")}`;
+    }
     switch (type) {
       case "[object Object]": {
         return Object.keys(_data).reduce((acc, key) => {
           const filtered = _filter(_data[key], globs, `${path}/${key}`);
-          if (filtered !== undefined) {
-            acc[key] = filtered;
-          }
+          acc[key] = filtered;
           return acc;
         }, {} as object);
       }
       case "[object Array]": {
         return (_data).reduce((acc, el, idx) => {
           const filtered = _filter(el, globs, `${path}/${idx}`);
-          if (filtered !== undefined) {
-            acc.push(filtered);
-          }
+          acc.push(filtered);
           return acc;
         }, [] as any[]);
       }

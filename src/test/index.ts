@@ -1,4 +1,4 @@
-import { test } from "ava";
+import test from "ava";
 import { dataInvariants } from "..";
 
 const JSON2 = (j) => JSON.stringify(j, null, 2);
@@ -15,8 +15,15 @@ test(`exclusion patterns`, (t) => {
         name: "alice",
       }],
       id: 1,
+      inf: Infinity,
+      ninf: -Infinity,
+      null: null,
     },
     key: "Invariant Key",
+    obj: {},
+    // tslint:disable-next-line:object-literal-sort-keys
+    arr: [],
+    bool: Math.random() < 0.5,
     signature: Math.random(),
     timestamp: Date.now(),
   };
@@ -24,11 +31,13 @@ test(`exclusion patterns`, (t) => {
     "!**/timestamp",
     "!**/signature",
     "!**/lastActive",
+    "!**/obj",
+    "!**/arr",
+    "!**/bool",
   ];
-  const { invariant, shape } = dataInvariants(data, variantFilters);
+  const { invariant } = dataInvariants(data, variantFilters);
   try {
     t.snapshot(invariant, "invariant");
-    t.snapshot(shape, "shape");
   } catch (err) {
     // tslint:disable-next-line:no-console
     console.error(JSON2({ data, variantFilters }));

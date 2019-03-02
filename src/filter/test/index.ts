@@ -1,4 +1,4 @@
-import { test } from "ava";
+import test from "ava";
 import { filter } from "..";
 
 test(`exclusion patterns`, (t) => {
@@ -84,7 +84,7 @@ test(`unsupported type`, (t) => {
         lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
         name: `alice`,
       }],
-      fun: () => {}, // tslint:disable-line:no-empty
+      fun: () => { }, // tslint:disable-line:no-empty
       id: 1,
     },
     key: `Invariant Key`,
