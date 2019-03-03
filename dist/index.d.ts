@@ -1,3 +1,1 @@
-export declare function dataInvariants(data: any, filters: string[]): {
-    invariant: any;
-};
+export declare function dataInvariants(data: any, filters: string[]): any;

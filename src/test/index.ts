@@ -35,9 +35,9 @@ test(`exclusion patterns`, (t) => {
     "!**/arr",
     "!**/bool",
   ];
-  const { invariant } = dataInvariants(data, variantFilters);
+  const invariant = dataInvariants(data, variantFilters);
   try {
-    t.snapshot(invariant, "invariant");
+    t.snapshot(invariant);
   } catch (err) {
     // tslint:disable-next-line:no-console
     console.error(JSON2({ data, variantFilters }));
