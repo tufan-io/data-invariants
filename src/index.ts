@@ -1,4 +1,5 @@
 import * as json5 from "json5";
+export { sanitize } from "./sanitize";
 import { filter } from "./filter/index";
 
 export function dataInvariants(data: any, filters: string[]) {
