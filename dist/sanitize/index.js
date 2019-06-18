@@ -30,5 +30,4 @@ function _sanitize(data, rmap) {
             return data;
     }
 }
-exports._sanitize = _sanitize;
 //# sourceMappingURL=index.js.map

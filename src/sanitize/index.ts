@@ -1,6 +1,6 @@
 import * as json5 from "json5";
 
-interface IReplacements {
+export interface IReplacements {
   [val: number]: number | string;
   [val: string]: number | string;
 }
@@ -12,7 +12,7 @@ export function sanitize(data: any, rmap: IReplacements) {
   return _sanitize(data, rmap);
 }
 
-export function _sanitize(data: any, rmap: IReplacements) {
+function _sanitize(data: any, rmap: IReplacements) {
   const type = Object.prototype.toString.call(data);
   switch (type) {
     case "[object Object]":

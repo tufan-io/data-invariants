@@ -1,6 +1,7 @@
 import * as json5 from "json5";
-export { sanitize } from "./sanitize";
 import { filter } from "./filter/index";
+
+export * from "./sanitize";
 
 export function dataInvariants(data: any, filters: string[]) {
   // a simple filters to eliminate non-json fields from data.
