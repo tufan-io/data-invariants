@@ -29,7 +29,5 @@ test(`sanitize`, (t) => {
     }],
   };
 
-  // tslint:disable-next-line:no-console
-  console.log(replacements);
   t.snapshot(sanitize(data, replacements));
 });

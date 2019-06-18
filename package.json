@@ -19,97 +19,79 @@
   "scripts": {
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "todos": "leasot --exit-nicely --skip-unsupported ./src ./config",
+    "todos": "leasot --exit-nicely --skip-unsupported ./src",
     "staged-mods-ok": "git-mods --staged_ok",
     "no-mods": "git-mods",
-    "clean": "rimraf build .nyc_output coverage",
-    "clean:dist": "rimraf dist",
+    "clean": "rimraf dist .nyc_output coverage",
     "lint": "tslint -c tslint.json --project ./tsconfig.json --format stylish",
-    "compile:build": "tsc",
-    "compile:dist": "tsc -p tsconfig.dist.json",
+    "compile": "tsc",
     "compile:watch": "tsc -w",
-    "sh": "npm-sh",
     "secure": "npm audit",
     "check": "npm outdated",
     "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95 --statements 95",
     "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
     "nyc-report": "nyc report --reporter=text-summary",
-    "test-with-cover": "cross-env NODE_ENV=test nyc -r html -r lcov -r text-summary ava --verbose",
-    "test-without-cover": "cross-env NODE_ENV=test ava --verbose",
+    "test": "cross-env NODE_ENV=test nyc -r html -r lcov -r text-summary ava --verbose",
+    "test-no-cover": "cross-env NODE_ENV=test ava --verbose",
     "build": "npm-run-batch",
     "qt": "npm-run-batch",
-    "build:watch": "cross-env NODE_ENV=production run-batch",
     "pkg-ok": "pkg-ok",
+    "dep-check": "dependency-check . --no-dev",
     "pre-commit-hook": "run-batch",
     "pre-push-hook": "run-batch",
     "snapshots": "cross-env NODE_ENV=test ava --verbose --update-snapshots",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "cloc": "cloc --exclude-dir=test --by-file ./src",
-    "all": "run-batch"
+    "all": "run-batch",
+    "cloc": "cloc --exclude-dir=test --by-file ./src"    
   },
   "run-batch": {
     "build": [
       "lint",
-      [
         "clean",
-        "clean:dist"
-      ],
-      "compile:build",
-      [
-        "test-with-cover",
-        "compile:dist"
-      ],
+      "compile",
+      "test",
       "todos"
     ],
     "qt": [
-      "compile:build",
-      "test-without-cover"
-    ],
-    "build:watch": [
-      "compile:watch"
+      "clean",
+      "compile",
+      "test-no-cover"
     ],
     "pre-commit-hook": [
       "check-coverage",
+      "dep-check",
       "pkg-ok",
       "staged-mods-ok"
     ],
     "pre-push-hook": [
       "secure",
       "no-mods"
-    ],
-    "all": [
-      "build",
-      "precommit",
-      "check",
-      "secure"
     ]
   },
   "devDependencies": {
-    "@types/node": "^11.10.4",
-    "ava": "^1.2.1",
-    "cloc": "^2.4.0",
-    "commitizen": "^3.0.7",
-    "conventional-changelog-cli": "^2.0.12",
-    "coveralls": "^3.0.3",
+    "@types/node": "^12.0.8",
+    "ava": "^2.1.0",
+    "cloc": "^2.5.0",
+    "commitizen": "^3.1.1",
+    "conventional-changelog-cli": "^2.0.21",
+    "coveralls": "^3.0.4",
     "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^2.1.0",
     "git-mods": "^1.0.9",
-    "husky": "^1.3.1",
-    "leasot": "^7.3.4",
+    "husky": "^2.4.1",
+    "leasot": "^7.4.0",
     "npm-run-batch": "0.0.8",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
     "pkg-ok": "^2.3.1",
     "rimraf": "^2.6.3",
-    "semantic-release": "^15.13.3",
-    "tslint": "^5.13.1",
-    "tslint-config-security": "^1.15.0",
+    "tslint": "^5.17.0",
+    "tslint-config-security": "^1.16.0",
     "tslint-sonarts": "^1.9.0",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.5.2",
     "typestrict": "^1.0.2"
   },
   "dependencies": {
     "json5": "^2.1.0",
-    "micromatch": "^3.1.10"
+    "micromatch": "^4.0.2"
   },
   "config": {
     "commitizen": {
@@ -119,19 +101,21 @@
   "ava": {
     "serial": false,
     "files": [
-      "build/**/test.js",
-      "build/**/test/**/*.js"
+      "dist/**/test.js",
+      "dist/**/test/**/*.js",
+      "!dist/**/test/fixtures/**/*.js"
     ],
     "sources": [
-      "build/**/*.js"
+      "dist/**/*.js"
     ]
   },
   "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
     "exclude": [
-      "config/**/*",
-      "build/**/test/**/*.*",
-      "build/**/test.js",
-      "dist"
+      "**/test/**"
     ]
   },
   "husky": {

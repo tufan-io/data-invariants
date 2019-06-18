@@ -9,3 +9,4 @@ function dataInvariants(data, filters) {
     return index_1.filter(data, filters);
 }
 exports.dataInvariants = dataInvariants;
+//# sourceMappingURL=index.js.map

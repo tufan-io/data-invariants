@@ -4,7 +4,7 @@ const match = require("micromatch");
 function filter(data, globPatterns) {
     const _filter = (_data, globs, path = "") => {
         const type = Object.prototype.toString.call(_data);
-        if (match(path, globs).length === 0) {
+        if (path && 0 === match(path, globs).length) {
             return `[VARIANT_DATA: ${type.replace(/\[object /, "")}`;
         }
         switch (type) {
@@ -40,3 +40,4 @@ function normalizeGlobs(patterns) {
     const allNegations = patterns.reduce((acc, el) => acc && el[0] === "!", true);
     return allNegations ? ["**"].concat(patterns) : patterns;
 }
+//# sourceMappingURL=index.js.map

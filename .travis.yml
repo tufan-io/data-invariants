@@ -14,7 +14,7 @@ script:
     # get the coverage metrics to coveralls
   - npm run coveralls-report
 after_success:
-  - npm run semantic-release
+  # - npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

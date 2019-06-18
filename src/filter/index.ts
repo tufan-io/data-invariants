@@ -50,7 +50,8 @@ export function filter(data: any, globPatterns: string[]) {
     path: string = "",
   ) => {
     const type = Object.prototype.toString.call(_data);
-    if (match(path, globs).length === 0) {
+
+    if (path && 0 === match(path, globs).length) {
       return `[VARIANT_DATA: ${type.replace(/\[object /, "")}`;
     }
     switch (type) {
