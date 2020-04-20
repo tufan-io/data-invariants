@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const json5 = require("json5");
 function sanitize(data, rmap) {
+    // a simple filters to eliminate non-json fields from data.
+    // this is especially ueful whendata is a js object literal
     data = json5.parse(json5.stringify(data));
     return _sanitize(data, rmap);
 }

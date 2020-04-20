@@ -94,6 +94,6 @@ ava_1.default(`unsupported type`, (t) => {
         `!**/signature`,
         `!**/lastActive`,
     ];
-    t.throws(() => __1.filter(data, variantFilters), "unsupported data type Function at /deep/fun");
+    t.throws(() => __1.filter(data, variantFilters), { message: "unsupported data type Function at /deep/fun" });
 });
 //# sourceMappingURL=index.js.map

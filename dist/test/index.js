@@ -21,6 +21,7 @@ ava_1.default(`exclusion patterns`, (t) => {
         },
         key: "Invariant Key",
         obj: {},
+        // tslint:disable-next-line:object-literal-sort-keys
         arr: [],
         bool: Math.random() < 0.5,
         signature: Math.random(),
@@ -39,6 +40,7 @@ ava_1.default(`exclusion patterns`, (t) => {
         t.snapshot(invariant);
     }
     catch (err) {
+        // tslint:disable-next-line:no-console
         console.error(JSON2({ data, variantFilters }));
         throw err;
     }

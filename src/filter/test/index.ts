@@ -98,5 +98,5 @@ test(`unsupported type`, (t) => {
   ];
   t.throws(
     () => filter(data, variantFilters),
-    "unsupported data type Function at /deep/fun");
+    { message: "unsupported data type Function at /deep/fun" });
 });

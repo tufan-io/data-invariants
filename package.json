@@ -1,15 +1,18 @@
 {
   "name": "data-invariants",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "description": "A library to extract invariants over partially variable data",
   "keywords": [],
-  "author": "Shishir Ramam",
-  "repository": "github:sramam/data-invariants",
-  "license": "Apache-2.0",
-  "private": false,
-  "engines": {
-    "node": ">=6.0.0"
+  "homepage": "https://github.com/sramam/data-invariants#readme",
+  "bugs": {
+    "url": "https://github.com/sramam/data-invariants/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sramam/data-invariants.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Shishir Ramam",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -17,44 +20,133 @@
     "docs"
   ],
   "scripts": {
-    "commit": "git-cz",
+    "build": "npm-run-batch",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "todos": "leasot --exit-nicely --skip-unsupported ./src",
-    "staged-mods-ok": "git-mods --staged_ok",
-    "no-mods": "git-mods",
-    "clean": "rimraf dist .nyc_output coverage",
-    "lint": "tslint -c tslint.json --project ./tsconfig.json --format stylish",
+    "check-coverage": "nyc check-coverage",
+    "check-run-scripts": "run-batch",
+    "checks": "run-batch",
+    "clean": "rimraf dist .nyc_output coverage *.tsbuildinfo",
+    "cloc": "run-batch",
+    "cloc-md": "cloc --exclude-dir=test --quiet --sum-one --hide-rate --unix --by-file --md --out=docs/cloc.md ./src",
+    "cloc-report": "cloc --exclude-dir=test --quiet --sum-one --hide-rate --unix --out=docs/cloc.report ./src",
+    "cloc_": "cloc --exclude-dir=test --quiet --sum-one --hide-rate --unix ./src",
+    "commit": "git-cz",
     "compile": "tsc",
     "compile:watch": "tsc -w",
-    "secure": "npm audit",
-    "check": "npm outdated",
-    "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95 --statements 95",
-    "coveralls-report": "nyc report --reporter=text-lcov | coveralls",
-    "nyc-report": "nyc report --reporter=text-summary",
-    "test": "cross-env NODE_ENV=test nyc -r html -r lcov -r text-summary ava --verbose",
-    "test-no-cover": "cross-env NODE_ENV=test ava --verbose",
-    "build": "npm-run-batch",
-    "qt": "npm-run-batch",
-    "pkg-ok": "pkg-ok",
     "dep-check": "dependency-check . --no-dev",
+    "dependency-upgrade": "run-batch",
+    "ensure-bins": "which npm-check sort-package-json",
+    "format": "tsfmt -r",
+    "git-add_": "git add .",
+    "git-commit-upgrade_": "git diff-index --quiet HEAD || git commit -m \"chore: 🤖 updating dependencies\"",
+    "lint": "tslint -c tslint.json --project ./tsconfig.json --format stylish",
+    "no-circular-deps": "madge --circular dist/index.js",
+    "no-mods": "git-mods",
+    "npm-check_": "npm-check -y",
+    "nyc-report": "nyc report --reporter=text-summary",
+    "pkg-ok": "pkg-ok",
     "pre-commit-hook": "run-batch",
     "pre-push-hook": "run-batch",
+    "qt": "npm-run-batch",
+    "secure": "npm audit",
+    "sh": "npm-sh",
     "snapshots": "cross-env NODE_ENV=test ava --verbose --update-snapshots",
-    "all": "run-batch",
-    "cloc": "cloc --exclude-dir=test --by-file ./src"    
+    "sort-package-json": "sort-package-json",
+    "staged-mods-ok": "git-mods --staged_ok",
+    "test": "cross-env NODE_ENV=test nyc -r lcov -r text-summary -r json-summary ava --verbose",
+    "test-no-cover": "cross-env NODE_ENV=test ava --verbose",
+    "todos": "leasot --exit-nicely --skip-unsupported ./src",
+    "upgrade_": "npm upgrade"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pre-commit-hook",
+      "pre-push": "npm run pre-push-hook"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "ava": {
+    "files": [
+      "dist/**/test.js",
+      "dist/**/test/**/*.js",
+      "!dist/**/test/fixtures/**/*.js",
+      "!dist/**/helpers/**"
+    ],
+    "serial": false
+  },
+  "nyc": {
+    "branches": 100,
+    "exclude": [
+      "**/test/**",
+      "**/helpers/**"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "functions": 100,
+    "lines": 100,
+    "statements": 100
+  },
+  "dependencies": {
+    "json5": "^2.1.3",
+    "micromatch": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.0",
+    "ava": "^3.7.1",
+    "cloc": "^2.5.1",
+    "commitizen": "^4.0.4",
+    "conventional-changelog-cli": "^2.0.31",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.1.0",
+    "dependency-check": "^4.1.0",
+    "git-mods": "^1.0.10",
+    "husky": "^4.2.5",
+    "leasot": "^10.2.0",
+    "madge": "^3.8.0",
+    "npm-run-batch": "0.0.9",
+    "nyc": "^15.0.1",
+    "pkg-ok": "^2.3.1",
+    "rimraf": "^3.0.2",
+    "sort-package-json": "^1.42.0",
+    "tslint": "^6.1.1",
+    "tslint-config-security": "^1.16.0",
+    "tslint-sonarts": "^1.9.0",
+    "typescript": "^3.8.3",
+    "typescript-formatter": "^7.2.2",
+    "typestrict": "^1.0.2",
+    "which": "^2.0.2"
+  },
+  "engines": {
+    "node": ">=13.0.0"
   },
   "run-batch": {
     "build": [
+      "format",
       "lint",
-        "clean",
+      "clean",
       "compile",
       "test",
+      "no-circular-deps",
+      "cloc",
       "todos"
     ],
     "qt": [
-      "clean",
       "compile",
       "test-no-cover"
+    ],
+    "checks": [
+      "lint",
+      "check-coverage",
+      "dep-check",
+      "no-circular-deps",
+      "pkg-ok",
+      "staged-mods-ok"
     ],
     "pre-commit-hook": [
       "check-coverage",
@@ -65,63 +157,31 @@
     "pre-push-hook": [
       "secure",
       "no-mods"
-    ]
-  },
-  "devDependencies": {
-    "@types/node": "^12.0.8",
-    "ava": "^2.1.0",
-    "cloc": "^2.5.0",
-    "commitizen": "^3.1.1",
-    "conventional-changelog-cli": "^2.0.21",
-    "coveralls": "^3.0.4",
-    "cross-env": "^5.2.0",
-    "cz-conventional-changelog": "^2.1.0",
-    "git-mods": "^1.0.9",
-    "husky": "^2.4.1",
-    "leasot": "^7.4.0",
-    "npm-run-batch": "0.0.8",
-    "nyc": "^14.1.1",
-    "pkg-ok": "^2.3.1",
-    "rimraf": "^2.6.3",
-    "tslint": "^5.17.0",
-    "tslint-config-security": "^1.16.0",
-    "tslint-sonarts": "^1.9.0",
-    "typescript": "^3.5.2",
-    "typestrict": "^1.0.2"
-  },
-  "dependencies": {
-    "json5": "^2.1.0",
-    "micromatch": "^4.0.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "ava": {
-    "serial": false,
-    "files": [
-      "dist/**/test.js",
-      "dist/**/test/**/*.js",
-      "!dist/**/test/fixtures/**/*.js"
     ],
-    "sources": [
-      "dist/**/*.js"
-    ]
-  },
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".tsx"
+    "cloc": [
+      "cloc-md",
+      "cloc-report",
+      "cloc_"
     ],
-    "exclude": [
-      "**/test/**"
+    "dependency-upgrade": [
+      "no-mods",
+      "ensure-bins",
+      "sort-package-json",
+      "npm-check_",
+      "upgrade_",
+      "dep-check",
+      "no-circular-deps",
+      "git-add_",
+      "build",
+      "git-commit-upgrade_"
+    ],
+    "check-run-scripts": [
+      "build",
+      "qt",
+      "checks",
+      "pre-commit-hook",
+      "pre-push-hook",
+      "dependency-upgrade"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run pre-commit-hook",
-      "pre-push": "npm run pre-push-hook"
-    }
   }
 }

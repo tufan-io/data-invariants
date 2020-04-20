@@ -8,11 +8,11 @@
         "typeRoots": ["node_modules/@types"],
         "sourceMap": true,
         "rootDir": "src",
-        "removeComments": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "incremental": true
     },
     "exclude": [
         "node_modules",
-        "dist",
+        "dist"
     ]
 }
