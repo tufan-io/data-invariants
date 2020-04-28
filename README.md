@@ -2,18 +2,9 @@
 
 A library to extract invariants over partially variable data
 
-<!-- badge -->
 [![npm license](https://img.shields.io/npm/l/data-invariants.svg)](https://www.npmjs.com/package/data-invariants)
-[![travis status](https://img.shields.io/travis/sramam/data-invariants.svg)](https://travis-ci.org/sramam/data-invariants)
-[![Build status](https://ci.appveyor.com/api/projects/status/90am2usst4qeutgi?svg=true)](https://ci.appveyor.com/project/sramam/data-invariants)
-[![Coverage Status](https://coveralls.io/repos/github/sramam/data-invariants/badge.svg?branch=master)](https://coveralls.io/github/sramam/data-invariants?branch=master)
-[![David](https://david-dm.org/sramam/data-invariants/status.svg)](https://david-dm.org/sramam/data-invariants)
-[![David](https://david-dm.org/sramam/data-invariants/dev-status.svg)](https://david-dm.org/sramam/data-invariants?type=dev)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-
+[![action-ci](https://github.com/tufan-io/simple-ci/workflows/action-ci/badge.svg)](https://github.com/tufan-io/simple-ci/actions)
 [![NPM](https://nodei.co/npm/data-invariants.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/data-invariants/)
-<!-- endbadge -->
 
 ## Why?
 
