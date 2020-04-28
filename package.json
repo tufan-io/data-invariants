@@ -4,13 +4,13 @@
   "private": false,
   "description": "A library to extract invariants over partially variable data",
   "keywords": [],
-  "homepage": "https://github.com/sramam/data-invariants#readme",
+  "homepage": "https://github.com/tufan-io/data-invariants#readme",
   "bugs": {
-    "url": "https://github.com/sramam/data-invariants/issues"
+    "url": "https://github.com/tufan-io/data-invariants/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sramam/data-invariants.git"
+    "url": "git+https://github.com/tufan-io/data-invariants.git"
   },
   "license": "Apache-2.0",
   "author": "Shishir Ramam",
