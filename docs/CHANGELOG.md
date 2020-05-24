@@ -1,3 +1,13 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/tufan-io/data-invariants/compare/0.2.1...0.2.2) (2020-05-24)
+
+
+### Bug Fixes
+
+* moving  -> . windows compatibility ([102d899](https://github.com/tufan-io/data-invariants/commit/102d899))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/tufan-io/data-invariants/compare/0.2.0...0.2.1) (2020-04-28)
 
