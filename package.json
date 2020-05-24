@@ -51,7 +51,7 @@
     "pkg-ok": "pkg-ok",
     "pre-commit-hook": "run-batch",
     "pre-push-hook": "run-batch",
-    "prepare": "which npm-check git-cz",
+    "prepare": "node-which npm-check git-cz",
     "prepublishOnly": "run-batch",
     "postpublish": "run-batch",
     "qt": "run-batch",

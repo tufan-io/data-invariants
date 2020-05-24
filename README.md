@@ -3,7 +3,7 @@
 A library to extract invariants over partially variable data
 
 [![npm license](https://img.shields.io/npm/l/data-invariants.svg)](https://www.npmjs.com/package/data-invariants)
-[![action-ci](https://github.com/tufan-io/simple-ci/workflows/action-ci/badge.svg)](https://github.com/tufan-io/simple-ci/actions)
+[![action-ci](https://github.com/tufan-io/data-invariants/workflows/action-ci/badge.svg)](https://github.com/tufan-io/data-invariants/actions)
 [![NPM](https://nodei.co/npm/data-invariants.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/data-invariants/)
 
 ## Why?
