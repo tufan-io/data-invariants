@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.filter = void 0;
 const match = require("micromatch");
 /**
  * Given a JSON object and a set of JSON-path like glob patterns,
@@ -43,6 +44,7 @@ const match = require("micromatch");
  * @param {string[]} globPatterns
  * @returns
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 function filter(data, globPatterns) {
     const _filter = (_data, globs, path = "") => {
         const type = Object.prototype.toString.call(_data);
@@ -58,11 +60,7 @@ function filter(data, globPatterns) {
                 }, {});
             }
             case "[object Array]": {
-                return (_data).reduce((acc, el, idx) => {
-                    const filtered = _filter(el, globs, `${path}/${idx}`);
-                    acc.push(filtered);
-                    return acc;
-                }, []);
+                return _data.map((el, idx) => _filter(el, globs, `${path}/${idx}`));
             }
             case "[object String]":
             case "[object Boolean]":

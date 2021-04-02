@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sanitize = void 0;
 const json5 = require("json5");
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 function sanitize(data, rmap) {
     // a simple filters to eliminate non-json fields from data.
     // this is especially ueful whendata is a js object literal
@@ -8,6 +10,7 @@ function sanitize(data, rmap) {
     return _sanitize(data, rmap);
 }
 exports.sanitize = sanitize;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function _sanitize(data, rmap) {
     const type = Object.prototype.toString.call(data);
     switch (type) {
@@ -23,7 +26,7 @@ function _sanitize(data, rmap) {
         case "[object Number]":
             return Object.keys(rmap).reduce((_data, candidate) => {
                 const _candidate = Number(candidate);
-                return (!isNaN(_candidate) && _candidate === _data)
+                return !isNaN(_candidate) && _candidate === _data
                     ? rmap[candidate]
                     : _data;
             }, data);

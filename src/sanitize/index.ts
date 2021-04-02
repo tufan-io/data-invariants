@@ -5,6 +5,7 @@ export interface IReplacements {
   [val: string]: number | string;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export function sanitize(data: any, rmap: IReplacements) {
   // a simple filters to eliminate non-json fields from data.
   // this is especially ueful whendata is a js object literal
@@ -12,6 +13,7 @@ export function sanitize(data: any, rmap: IReplacements) {
   return _sanitize(data, rmap);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function _sanitize(data: any, rmap: IReplacements) {
   const type = Object.prototype.toString.call(data);
   switch (type) {
@@ -19,23 +21,26 @@ function _sanitize(data: any, rmap: IReplacements) {
       return Object.keys(data).reduce((result, key) => {
         result[key] = _sanitize(data[key], rmap);
         return result;
-      }, {} as object);
+      }, {} as Record<string, unknown>);
     case "[object Array]":
       return data.map((el) => _sanitize(el, rmap));
     case "[object String]":
       return Object.keys(rmap).reduce(
-        (_data, candidate) => (_data as string).replace(candidate, rmap[candidate] as string),
-        data);
+        (_data, candidate) =>
+          (_data as string).replace(candidate, rmap[candidate] as string),
+        data
+      );
     case "[object Number]":
       return Object.keys(rmap).reduce(
         (_data, candidate) => {
           const _candidate = Number(candidate);
-          return (!isNaN(_candidate) && _candidate === _data)
+          return !isNaN(_candidate) && _candidate === _data
             ? rmap[candidate]
             : _data;
         },
 
-        data);
+        data
+      );
     case "[object Boolean]":
     case "[object Null]":
       return data;

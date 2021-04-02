@@ -6,37 +6,39 @@ ava_1.default(`exclusion patterns`, (t) => {
     const data = {
         deep: {
             active: true,
-            children: [{
+            children: [
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: "john",
-                }, {
+                },
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: "alice",
-                }],
+                },
+            ],
             id: 1,
         },
         key: `Invariant Key`,
         signature: Math.random(),
         timestamp: Date.now(),
     };
-    const variantFilters = [
-        `!**/timestamp`,
-        `!**/signature`,
-        `!**/lastActive`,
-    ];
+    const variantFilters = [`!**/timestamp`, `!**/signature`, `!**/lastActive`];
     t.snapshot(__1.filter(data, variantFilters));
 });
 ava_1.default(`exclusion and inclusion patterns`, (t) => {
     const data = {
         deep: {
             active: true,
-            children: [{
+            children: [
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: "john",
-                }, {
+                },
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: "alice",
-                }],
+                },
+            ],
             id: 1,
         },
         key: `Invariant Key`,
@@ -75,13 +77,16 @@ ava_1.default(`unsupported type`, (t) => {
     const data = {
         deep: {
             active: true,
-            children: [{
+            children: [
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: `john`,
-                }, {
+                },
+                {
                     lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
                     name: `alice`,
-                }],
+                },
+            ],
             fun: () => { },
             id: 1,
         },
@@ -89,11 +94,9 @@ ava_1.default(`unsupported type`, (t) => {
         signature: Math.random(),
         timestamp: Date.now(),
     };
-    const variantFilters = [
-        `!**/timestamp`,
-        `!**/signature`,
-        `!**/lastActive`,
-    ];
-    t.throws(() => __1.filter(data, variantFilters), { message: "unsupported data type Function at /deep/fun" });
+    const variantFilters = [`!**/timestamp`, `!**/signature`, `!**/lastActive`];
+    t.throws(() => __1.filter(data, variantFilters), {
+        message: "unsupported data type Function at /deep/fun",
+    });
 });
 //# sourceMappingURL=index.js.map

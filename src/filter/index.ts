@@ -1,4 +1,3 @@
-
 import * as match from "micromatch";
 
 /**
@@ -43,12 +42,9 @@ import * as match from "micromatch";
  * @param {string[]} globPatterns
  * @returns
  */
-export function filter(data: any, globPatterns: string[]) {
-  const _filter = (
-    _data: any,
-    globs: string[],
-    path: string = "",
-  ) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+export function filter(data: any, globPatterns: string[]): any {
+  const _filter = (_data, globs, path = "") => {
     const type = Object.prototype.toString.call(_data);
 
     if (path && 0 === match(path, globs).length) {
@@ -60,14 +56,10 @@ export function filter(data: any, globPatterns: string[]) {
           const filtered = _filter(_data[key], globs, `${path}/${key}`);
           acc[key] = filtered;
           return acc;
-        }, {} as object);
+        }, {} as Record<string, unknown>);
       }
       case "[object Array]": {
-        return (_data).reduce((acc, el, idx) => {
-          const filtered = _filter(el, globs, `${path}/${idx}`);
-          acc.push(filtered);
-          return acc;
-        }, [] as any[]);
+        return _data.map((el, idx) => _filter(el, globs, `${path}/${idx}`));
       }
       case "[object String]":
       case "[object Boolean]":
