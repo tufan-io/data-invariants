@@ -1,3 +1,20 @@
+## [0.2.5](https://github.com/tufan-io/data-invariants/compare/0.2.4...0.2.5) (2021-04-04)
+
+
+
+## [0.2.4](https://github.com/tufan-io/data-invariants/compare/0.2.3...0.2.4) (2021-04-02)
+
+
+
+## [0.2.3](https://github.com/tufan-io/data-invariants/compare/0.2.2...0.2.3) (2021-04-02)
+
+
+### Bug Fixes
+
+* move tslint/tsfmt -> eslint/prettier ([4b24c95](https://github.com/tufan-io/data-invariants/commit/4b24c95212c65c487489bec835f2f0522ff2888f))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/tufan-io/data-invariants/compare/0.2.1...0.2.2) (2020-05-24)
 

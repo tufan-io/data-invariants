@@ -89,8 +89,7 @@ test(`unsupported type`, (t) => {
           name: `alice`,
         },
       ],
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      fun: () => {},
+      fun: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
       id: 1,
     },
     key: `Invariant Key`,

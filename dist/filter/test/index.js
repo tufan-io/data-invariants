@@ -87,7 +87,6 @@ ava_1.default(`unsupported type`, (t) => {
                     name: `alice`,
                 },
             ],
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             fun: () => { },
             id: 1,
         },
