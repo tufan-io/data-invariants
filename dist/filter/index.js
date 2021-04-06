@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.filter = void 0;
 const match = require("micromatch");
 /**
  * Given a JSON object and a set of JSON-path like glob patterns,
@@ -58,7 +59,7 @@ function filter(data, globPatterns) {
                 }, {});
             }
             case "[object Array]": {
-                return (_data).reduce((acc, el, idx) => {
+                return _data.reduce((acc, el, idx) => {
                     const filtered = _filter(el, globs, `${path}/${idx}`);
                     acc.push(filtered);
                     return acc;

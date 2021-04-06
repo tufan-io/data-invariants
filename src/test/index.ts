@@ -7,13 +7,16 @@ test(`exclusion patterns`, (t) => {
   const data = {
     deep: {
       active: true,
-      children: [{
-        lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
-        name: "john",
-      }, {
-        lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
-        name: "alice",
-      }],
+      children: [
+        {
+          lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
+          name: "john",
+        },
+        {
+          lastActive: Date.now() - Math.random() * 24 * 3600 * 100,
+          name: "alice",
+        },
+      ],
       id: 1,
       inf: Infinity,
       ninf: -Infinity,
@@ -21,7 +24,6 @@ test(`exclusion patterns`, (t) => {
     },
     key: "Invariant Key",
     obj: {},
-    // tslint:disable-next-line:object-literal-sort-keys
     arr: [],
     bool: Math.random() < 0.5,
     signature: Math.random(),
@@ -39,7 +41,6 @@ test(`exclusion patterns`, (t) => {
   try {
     t.snapshot(invariant);
   } catch (err) {
-    // tslint:disable-next-line:no-console
     console.error(JSON2({ data, variantFilters }));
     throw err;
   }

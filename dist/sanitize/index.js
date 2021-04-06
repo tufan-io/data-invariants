@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sanitize = void 0;
 const json5 = require("json5");
 function sanitize(data, rmap) {
     // a simple filters to eliminate non-json fields from data.
@@ -23,7 +24,7 @@ function _sanitize(data, rmap) {
         case "[object Number]":
             return Object.keys(rmap).reduce((_data, candidate) => {
                 const _candidate = Number(candidate);
-                return (!isNaN(_candidate) && _candidate === _data)
+                return !isNaN(_candidate) && _candidate === _data
                     ? rmap[candidate]
                     : _data;
             }, data);

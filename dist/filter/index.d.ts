@@ -1,3 +1,4 @@
+import { JsPrimitive } from "../definitions";
 /**
  * Given a JSON object and a set of JSON-path like glob patterns,
  * returns a filtered version of the object.
@@ -40,4 +41,4 @@
  * @param {string[]} globPatterns
  * @returns
  */
-export declare function filter(data: any, globPatterns: string[]): any;
+export declare function filter(data: JsPrimitive, globPatterns: string[]): JsPrimitive;

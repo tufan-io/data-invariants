@@ -1,10 +1,11 @@
-cloc|github.com/AlDanial/cloc v 1.85
+cloc|github.com/AlDanial/cloc v 1.88
 --- | ---
 
 File|blank|comment|code
 :-------|-------:|-------:|-------:
-./src/filter/index.ts|4|49|43
-./src/sanitize/index.ts|4|2|37
-./src/index.ts|2|2|7
+./src/filter/index.ts|3|49|47
+./src/sanitize/index.ts|4|2|46
+./src/index.ts|2|2|11
+./src/definitions.ts|0|0|6
 --------|--------|--------|--------
-SUM:|10|53|87
+SUM:|9|53|110

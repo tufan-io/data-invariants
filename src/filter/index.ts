@@ -1,5 +1,5 @@
-
 import * as match from "micromatch";
+import { JsPrimitive } from "../definitions";
 
 /**
  * Given a JSON object and a set of JSON-path like glob patterns,
@@ -43,12 +43,12 @@ import * as match from "micromatch";
  * @param {string[]} globPatterns
  * @returns
  */
-export function filter(data: any, globPatterns: string[]) {
+export function filter(data: JsPrimitive, globPatterns: string[]): JsPrimitive {
   const _filter = (
-    _data: any,
+    _data: JsPrimitive,
     globs: string[],
-    path: string = "",
-  ) => {
+    path = ""
+  ): JsPrimitive => {
     const type = Object.prototype.toString.call(_data);
 
     if (path && 0 === match(path, globs).length) {
@@ -60,14 +60,17 @@ export function filter(data: any, globPatterns: string[]) {
           const filtered = _filter(_data[key], globs, `${path}/${key}`);
           acc[key] = filtered;
           return acc;
-        }, {} as object);
+        }, {} as Record<string, unknown>);
       }
       case "[object Array]": {
-        return (_data).reduce((acc, el, idx) => {
-          const filtered = _filter(el, globs, `${path}/${idx}`);
-          acc.push(filtered);
-          return acc;
-        }, [] as any[]);
+        return (_data as Array<JsPrimitive>).reduce(
+          (acc: JsPrimitive[], el: JsPrimitive, idx) => {
+            const filtered = _filter(el, globs, `${path}/${idx}`);
+            acc.push(filtered);
+            return acc;
+          },
+          [] as JsPrimitive[]
+        );
       }
       case "[object String]":
       case "[object Boolean]":
