@@ -1,3 +1,7 @@
+## [0.2.7](https://github.com/tufan-io/data-invariants/compare/0.2.6...0.2.7) (2021-04-19)
+
+
+
 ## [0.2.6](https://github.com/tufan-io/data-invariants/compare/0.2.5...0.2.6) (2021-04-06)
 
 

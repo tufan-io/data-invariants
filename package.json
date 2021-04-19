@@ -1,6 +1,6 @@
 {
   "name": "data-invariants",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": false,
   "description": "A library to extract invariants over partially variable data",
   "keywords": [],
